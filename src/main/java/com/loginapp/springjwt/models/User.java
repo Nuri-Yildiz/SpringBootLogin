@@ -3,7 +3,16 @@ package com.loginapp.springjwt.models;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -12,7 +21,7 @@ import javax.validation.constraints.Size;
 @Table(	name = "users", 
 		uniqueConstraints = { 
 			@UniqueConstraint(columnNames = "username"),
-			@UniqueConstraint(columnNames = "email") 
+			@UniqueConstraint(columnNames = "email")
 		})
 public class User {
 	@Id
@@ -31,6 +40,9 @@ public class User {
 	@NotBlank
 	@Size(max = 120)
 	private String password;
+	
+	@Size(max = 120)
+	private String description;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -45,6 +57,13 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+	}
+	
+	public User(String username, String email, String password,String description) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.description = description;
 	}
 
 	public Long getId() {
@@ -77,6 +96,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Set<Role> getRoles() {
