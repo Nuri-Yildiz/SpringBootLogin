@@ -58,13 +58,6 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-	
-	public User(String username, String email, String password,String description) {
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.description = description;
-	}
 
 	public Long getId() {
 		return id;
@@ -98,13 +91,13 @@ public class User {
 		this.password = password;
 	}
 	
-	public String getDescription() {
+	/*public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
+	}*/
 
 	public Set<Role> getRoles() {
 		return roles;
